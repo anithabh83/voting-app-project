@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: vote
-          image: abhanumantharaju/vote:dev
+          image: abhanumantharaju/vote:prod
           ports:
             - containerPort: 80
           resources:
