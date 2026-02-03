@@ -10,7 +10,7 @@ COPY . .
 RUN mvn package
 
 # Stage 2: Create the final lightweight image
-FROM openjdk:17
+FROM amazoncorretto:17
 
 WORKDIR /app
 
