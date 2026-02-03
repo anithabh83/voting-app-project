@@ -89,6 +89,9 @@ pipeline {
     stage('Apply Resource Quota') {
       steps {
         sh """
+        pwd
+        ls
+        ls k8s
         kubectl apply -f k8s/resource-quota.yaml -n $NAMESPACE
         """
       }
