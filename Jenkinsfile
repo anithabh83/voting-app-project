@@ -3,8 +3,6 @@ pipeline {
 
   environment {
     DOCKERHUB_USER = "abhanumantharaju"
-    TAG = ""
-    NAMESPACE = ""
   }
 
   stages {
@@ -16,17 +14,34 @@ pipeline {
       steps {
         script {
           if (env.BRANCH_NAME == 'dev') {
-            TAG = 'dev'
-            NAMESPACE = 'dev'
+            env.TAG = 'dev'
+            env.NAMESPACE = 'dev'
           } else if (env.BRANCH_NAME == 'test') {
-            TAG = 'test'
-            NAMESPACE = 'test'
+            env.TAG = 'test'
+            env.NAMESPACE = 'test'
           } else if (env.BRANCH_NAME == 'prod') {
-            TAG = 'prod'
-            NAMESPACE = 'prod'
+            env.TAG = 'prod'
+            env.NAMESPACE = 'prod'
           } else {
             error "Branch not supported"
           }
+        }
+      }
+    }
+
+    /* ---------------------------
+       Docker Login
+       --------------------------- */
+    stage('Docker Login') {
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: 'dockerhub-creds',
+          usernameVariable: 'DOCKER_USER',
+          passwordVariable: 'DOCKER_PASS'
+        )]) {
+          sh '''
+            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+          '''
         }
       }
     }
@@ -92,4 +107,3 @@ pipeline {
     }
   }
 }
-
