@@ -5,7 +5,7 @@ metadata:
 spec:
   hard:                        # Hard limits that cannot be exceeded
     pods: "10"                 # Maximum number of pods allowed in this namespace
-    requests.cpu: "2"          # Total CPU requests across all pods     # Combined CPU requests of all pods must be <= 2 cores
+    requests.cpu: "2"          # Total CPU requests across all pods  -minimum    # Combined CPU requests of all pods must be <= 2 cores
     requests.memory: 2Gi       # Total memory requests across all pods  # Combined memory requests must be <= 2Gi  Gi->	Gibibyte	1024 Mi
-    limits.cpu: "4"            # Total CPU limits across all pods       # Combined CPU limits must be <= 4 cores
+    limits.cpu: "4"            # Total CPU limits across all pods  -maximum     # Combined CPU limits must be <= 4 cores
     limits.memory: 4Gi         # Total memory limits across all pods    # Combined memory limits must be <= 4Gi
