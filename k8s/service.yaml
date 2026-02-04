@@ -1,13 +1,11 @@
-
-apiVersion: v1
-kind: Service
+apiVersion: v1                 # Uses Kubernetes core (v1) API
+kind: Service                  # Defines a Service to expose an application
 metadata:
-  name: vote-service
+  name: vote-service           # Name of the Service
 spec:
-  type: NodePort
+  type: NodePort               # Exposes the service on a static port on each node
   selector:
-    app: vote
+    app: vote                  # Selects pods with label app=vote    # Traffic will be sent only to these pods
   ports:
-  - port: 80
-    targetPort: 80
-    
+  - port: 80                   # Service port (clients access service on this port)
+    targetPort: 80             # Container port where the application is running    # Traffic from port 80 is forwarded to container port 80
