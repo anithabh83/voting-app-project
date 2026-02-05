@@ -54,9 +54,7 @@ pipeline {
       steps {
         sh """
           # Build Docker images with branch-based tag
-          docker build -t $DOCKERHUB_USER/vote:$TAG vote/
-          docker build -t $DOCKERHUB_USER/worker:$TAG worker/
-          docker build -t $DOCKERHUB_USER/result:$TAG result/
+          docker build -t $DOCKERHUB_USER/vote:$TAG vote
         """
       }
     }
@@ -69,8 +67,6 @@ pipeline {
         sh """
           # Push images to DockerHub
           docker push $DOCKERHUB_USER/vote:$TAG
-          docker push $DOCKERHUB_USER/worker:$TAG
-          docker push $DOCKERHUB_USER/result:$TAG
         """
       }
     }
